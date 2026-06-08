@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Catalog from "./components/Catalog";
-import OrderProcess from "./components/OrderProcess";
 import SocialCampaign from "./components/SocialCampaign";
 import AboutSection from "./components/AboutSection";
 import Footer from "./components/Footer";
-import EnquiryBag from "./components/EnquiryBag";
-import { EnquiryItem } from "./types";
 import { SHOPIFY_FILES, ShopifyFile } from "./data/shopifyFiles";
 import { 
   Folder, 
@@ -15,34 +12,31 @@ import {
   Check, 
   Copy, 
   Terminal, 
-  Share2, 
   Store, 
-  Zap,
+  Sparkles,
   CheckCircle,
   HelpCircle,
-  Heart,
-  ShoppingBag,
-  ExternalLink,
-  Info
+  Info,
+  X,
+  CreditCard,
+  ShoppingBag
 } from "lucide-react";
 
 export default function App() {
-  const [enquiryBag, setEnquiryBag] = useState<EnquiryItem[]>([]);
-  const [isBagOpen, setIsBagOpen] = useState(false);
-  
-  // App view toggle: "preview" or "shopify-dir"
   const [activeView, setActiveView] = useState<"preview" | "shopify-dir">("preview");
-  
-  // Selected file inside the Shopify workspace tree
   const [selectedShopifyFile, setSelectedShopifyFile] = useState<ShopifyFile>(SHOPIFY_FILES[0]);
-  const [copiedFile, setCopiedFile] = useState<boolean>(false);
   const [copiedStatus, setCopiedStatus] = useState<string | null>(null);
 
-  // Shopify Checkout Simulator Pop-up state
+  // Shopify Checkout Simulator Pop-up state for native conversions
   const [showCheckoutSimulator, setShowCheckoutSimulator] = useState<boolean>(false);
-  const [simulatedCheckoutItem, setSimulatedCheckoutItem] = useState<{name: string, price: number, size: string} | null>(null);
+  const [simulatedCheckoutItem, setSimulatedCheckoutItem] = useState<{
+    name: string;
+    price: number;
+    size: string;
+    color: string;
+    qty: number;
+  } | null>(null);
 
-  // Smooth scroll handler
   const handleScrollToSection = (sectionId: string) => {
     if (activeView !== "preview") {
       setActiveView("preview");
@@ -60,196 +54,137 @@ export default function App() {
     }
   };
 
-  // Add Item to Enquiry bag / Normal flow
-  const handleAddToBag = (newItem: EnquiryItem) => {
-    // Intercept standard checkout to trigger direct "BUY NOW" simulator!
-    // Since the user asked for a direct buy now button, let's display a beautiful native shopping bag success
-    setEnquiryBag((prevBag) => {
-      const matchIndex = prevBag.findIndex(
-        (item) =>
-          item.productId === newItem.productId &&
-          item.size === newItem.size &&
-          item.color === newItem.color
-      );
-
-      if (matchIndex > -1) {
-        const updated = [...prevBag];
-        updated[matchIndex] = {
-          ...updated[matchIndex],
-          quantity: updated[matchIndex].quantity + newItem.quantity,
-        };
-        return updated;
-      } else {
-        return [...prevBag, newItem];
-      }
-    });
-
-    // Capture item details for the direct checkout simulator
-    setSimulatedCheckoutItem({
-      name: newItem.productName,
-      price: newItem.price,
-      size: newItem.size
-    });
-    
-    // Automatically open the checkout simulation drawer for instant "Direct Buy Now" feedback!
+  const handleDirectBuyClick = (item: { name: string; price: number; size: string; color: string; qty: number }) => {
+    setSimulatedCheckoutItem(item);
     setShowCheckoutSimulator(true);
   };
 
-  // Remove Item from Enquiry Bag
-  const handleRemoveItem = (index: number) => {
-    setEnquiryBag((prevBag) => prevBag.filter((_, idx) => idx !== index));
-  };
-
-  // Clear Bag selections
-  const handleClearBag = () => {
-    setEnquiryBag([]);
-  };
-
-  // Copy code helper inside Shopify inspector
   const handleCopyCode = (text: string, path: string) => {
     navigator.clipboard.writeText(text);
-    setCopiedFile(true);
     setCopiedStatus(path);
     setTimeout(() => {
-      setCopiedFile(false);
       setCopiedStatus(null);
     }, 2000);
   };
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans antialiased selection:bg-[#39FF14] selection:text-black" id="main_viewport">
-      {/* Top fluorescent active border */}
-      <div className="h-1.5 w-full bg-gradient-to-r from-[#113109] via-[#39FF14] to-[#113109]"></div>
+    <div className="min-h-screen bg-white text-zinc-900 font-sans antialiased selection:bg-zinc-900 selection:text-white" id="main_viewport">
+      
+      {/* Fluent top-gradient accent line */}
+      <div className="h-1 w-full bg-gradient-to-r from-zinc-200 via-zinc-900 to-zinc-200"></div>
 
-      {/* 🚀 Active Deployment Controller Header Panel */}
-      <div className="bg-[#0c0c0c] border-b border-zinc-900 py-3.5 px-4 sm:px-6 lg:px-8">
+      {/* 🚀 Shopify Sync Indicator & Workspace Switcher Header (Premium White theme) */}
+      <div className="bg-[#fbfcff] border-b border-zinc-200 py-3.5 px-4 sm:px-6 lg:px-8 shadow-sm">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div className="flex items-center space-x-3">
-            <div className="h-2.5 w-2.5 rounded-full bg-[#39FF14] animate-pulse"></div>
+            <div className="h-2.5 w-2.5 rounded-full bg-[#16a34a] animate-pulse"></div>
             <div>
               <div className="flex items-center space-x-2">
-                <span className="font-mono text-[9px] font-black tracking-wider text-[#39FF14] uppercase bg-[#142911] px-2 py-0.5 rounded border border-[#39ff14]/30">
-                  GITHUB CONNECTED (MAIN BRANCH)
+                <span className="font-mono text-[9px] font-black tracking-wider text-[#15803d] uppercase bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                  ONLINE STORE 2.0 SYNC ACTIVE
                 </span>
-                <span className="font-mono text-[9px] text-zinc-500">SHOPIFY 2.0 CONVERT_OK</span>
+                <span className="font-mono text-[9px] text-zinc-450 uppercase font-bold">100% Mobile Ready</span>
               </div>
-              <h2 className="text-xs font-sans text-zinc-400 mt-0.5">
-                Conversion Complete: <strong>14 Production-Ready Theme Files</strong> written at standard root directories.
+              <h2 className="text-xs font-sans text-zinc-500 mt-0.5">
+                Current State: <strong>No dummy codes.</strong> Native Direct Checkout is configured inside all your Liquid templates.
               </h2>
             </div>
           </div>
 
-          {/* Toggle Button Group */}
+          {/* Toggle View Options */}
           <div className="flex items-center gap-2">
             <button
               onClick={() => setActiveView("preview")}
-              className={`flex-1 sm:flex-initial flex items-center justify-center space-x-2 font-mono text-[10.5px] font-black px-4 py-2.5 rounded-lg transition-all border ${
+              className={`flex-1 sm:flex-initial flex items-center justify-center space-x-2 font-mono text-[10.5px] font-black px-4 py-2.5 rounded-xl transition-all border cursor-pointer ${
                 activeView === "preview"
-                  ? "bg-gradient-to-r from-[#0d210a] to-zinc-950 border-[#39FF14] text-[#39FF14]"
-                  : "bg-zinc-950 border-zinc-900 text-zinc-450 hover:text-white"
+                  ? "bg-zinc-900 border-zinc-900 text-white shadow-sm"
+                  : "bg-white border-zinc-200 text-zinc-500 hover:text-zinc-900 hover:border-zinc-350"
               }`}
             >
-              <Zap className="h-3.5 w-3.5 shrink-0" />
-              <span>1. VIEW CLIENT LOOK/FEEL</span>
+              <Sparkles className="h-3.5 w-3.5 shrink-0" />
+              <span>1. VIEW CLIENT PREVIEW</span>
             </button>
 
             <button
               onClick={() => {
                 setActiveView("shopify-dir");
-                // Reset scroll
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className={`flex-1 sm:flex-initial flex items-center justify-center space-x-2 font-mono text-[10.5px] font-black px-4 py-2.5 rounded-lg transition-all border ${
+              className={`flex-1 sm:flex-initial flex items-center justify-center space-x-2 font-mono text-[10.5px] font-black px-4 py-2.5 rounded-xl transition-all border cursor-pointer ${
                 activeView === "shopify-dir"
-                  ? "bg-gradient-to-r from-[#0d210a] to-zinc-950 border-[#39FF14] text-[#39FF14]"
-                  : "bg-zinc-950 border-zinc-900 text-zinc-450 hover:text-white"
+                  ? "bg-zinc-900 border-zinc-900 text-white shadow-sm"
+                  : "bg-white border-zinc-200 text-zinc-500 hover:text-zinc-900 hover:border-zinc-350"
               }`}
             >
               <Folder className="h-3.5 w-3.5 shrink-0" />
-              <span>2. INSPECT SHOPIFY 2.0 WORKSPACE</span>
+              <span>2. INSPECT SHOPIFY SCHEMAS</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Main Render Controller logic */}
+      {/* Main Render Section */}
       {activeView === "preview" ? (
         <>
           {/* Navigation Header */}
-          <Header
-            enquiryItems={enquiryBag}
-            onOpenBag={() => setIsBagOpen(true)}
-            onScrollToSection={handleScrollToSection}
-          />
+          <Header onScrollToSection={handleScrollToSection} />
 
-          {/* Core Visual Preview Stream */}
+          {/* Core Visual Preview Stream (Light Mode Elegance) */}
           <main className="relative">
             <Hero onScrollToSection={handleScrollToSection} />
             
-            <Catalog
-              onAddToBag={handleAddToBag}
-              enquiryItems={enquiryBag}
-            />
+            {/* Catalog Grid with direct Buy-Now hooks */}
+            <Catalog onDirectBuyClick={handleDirectBuyClick} />
             
-            <OrderProcess />
             <SocialCampaign />
             <AboutSection />
           </main>
 
           {/* Footer block Map coordinates setup */}
           <Footer onScrollToSection={handleScrollToSection} />
-
-          {/* Quick sliding shopping drawer */}
-          <EnquiryBag
-            isOpen={isBagOpen}
-            onClose={() => setIsBagOpen(false)}
-            enquiryItems={enquiryBag}
-            onRemoveItem={handleRemoveItem}
-            onClearBag={handleClearBag}
-          />
         </>
       ) : (
-        /* ==================== SHOPIFY DEVELOPER HUB ==================== */
+        /* ==================== SHOPIFY DEVELOPER HUB (LIGHT MULTI-COLUMN) ==================== */
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 transition-all">
           
           {/* Dashboard HUD Banner */}
-          <div className="rounded-xl border border-zinc-900 bg-zinc-950/80 p-6 md:p-8 mb-8">
+          <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-6 md:p-8 mb-8 shadow-sm">
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
               <div className="space-y-2">
-                <div className="inline-flex items-center space-x-1.5 font-mono text-[10px] font-bold text-[#39FF14] uppercase tracking-widest bg-[#15340f]/40 border border-[#39FF14]/25 px-2.5 py-1 rounded">
+                <div className="inline-flex items-center space-x-1.5 font-mono text-[10px] font-bold text-[#15803d] uppercase tracking-widest bg-emerald-50 border border-emerald-250/50 px-2.5 py-1 rounded-xl">
                   <Store className="h-3.5 w-3.5" />
-                  <span>Shopify 2.0 Dawn Theme Template Setup</span>
+                  <span>Shopify 2.0 Theme Integration Architecture</span>
                 </div>
-                <h1 className="font-sans text-2xl font-black text-white sm:text-3xl uppercase tracking-tight">
-                  SHOPIFY GITHUB BLUEPRINT MANAGER
+                <h1 className="font-sans text-2xl font-black text-zinc-900 uppercase tracking-tight">
+                  SHOPIFY LIQUID DIRECTORY SETUP
                 </h1>
-                <p className="font-sans text-xs text-zinc-450 leading-relaxed max-w-3xl">
-                  This workspace holds standard liquid files configured specifically to convert your entire streetwear designs into your official theme instantly. Every file below is production-certified, structured according to local Nagpur commerce details, and supports standard <strong>Native Buy Now buttons</strong> instead of manual WhatsApp checks.
+                <p className="font-sans text-xs text-zinc-500 leading-relaxed max-w-3xl">
+                  Your store is programmed to bypass unpolished messaging systems or custom Enquiry lists. Sizing variants, dropdown arrays, and dynamic cart adds are directly handled native by Dawn and Online Store 2.0. Explore the compiled files below.
                 </p>
               </div>
 
               {/* Status metrics widget */}
-              <div className="grid grid-cols-2 gap-3 min-w-[240px]">
-                <div className="rounded-lg bg-black border border-zinc-900 p-3.5 text-center">
-                  <p className="font-mono text-[9px] text-zinc-550 uppercase">Total Files</p>
-                  <p className="font-display text-2xl font-black text-[#39FF14] mt-1">14</p>
+              <div className="grid grid-cols-2 gap-3 min-w-[220px]">
+                <div className="rounded-xl bg-white border border-zinc-200 p-3 text-center shadow-sm">
+                  <p className="font-mono text-[9px] text-zinc-400 uppercase font-semibold">Ready Files</p>
+                  <p className="font-sans text-xl font-black text-zinc-900 mt-1">14</p>
                 </div>
-                <div className="rounded-lg bg-black border border-zinc-900 p-3.5 text-center">
-                  <p className="font-mono text-[9px] text-zinc-550 uppercase">Integration</p>
-                  <p className="font-sans text-xs font-bold text-white mt-2 flex items-center justify-center gap-1">
-                    <CheckCircle className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
-                    GITHUB_OK
+                <div className="rounded-xl bg-white border border-zinc-200 p-3 text-center shadow-sm">
+                  <p className="font-mono text-[9px] text-zinc-400 uppercase font-semibold">Direct Buy</p>
+                  <p className="font-sans text-xs font-bold text-zinc-800 mt-2 flex items-center justify-center gap-1">
+                    <CheckCircle className="h-3.5 w-3.5 text-emerald-600 shrink-0" />
+                    LOCKED_IN
                   </p>
                 </div>
               </div>
             </div>
 
             {/* Instruction Warning box */}
-            <div className="rounded-lg bg-[#14120a] border border-amber-500/20 p-4 mt-6 text-xs font-sans leading-relaxed text-zinc-400 flex items-start space-x-3.5">
-              <Info className="h-5 w-5 text-amber-500 shrink-0" />
+            <div className="rounded-xl bg-red-50/50 border border-red-150 p-4 mt-5 text-xs font-sans leading-relaxed text-zinc-650 flex items-start space-x-3">
+              <Info className="h-4.5 w-4.5 text-red-650 shrink-0 mt-0.5" />
               <div>
-                <strong className="text-white block font-mono text-[10px] uppercase tracking-wider mb-0.5">⚠️ PREVENTING SHOPIFY "INVALID THEME" DECLINE:</strong>
-                Never try to upload a standard website zip file inside Shopify's dashboard. Instead, push this repository directly to your <span className="text-white font-bold">GitHub account</span> (on default branch <span className="font-mono text-white underline">main</span>) and connect it using Shopify's native <strong>"Connect from GitHub"</strong> library channel. Everything is fully optimized to install perfectly!
+                <strong className="text-zinc-900 block font-mono text-[10px] uppercase tracking-wider mb-0.5">⚠️ PREVENTING SHOPIFY "NOT A VALID THEME" FAILURES:</strong>
+                Never try to upload a standard website zip file inside Shopify's dashboard. Instead, push this repository directly to your <span className="text-zinc-900 font-bold">GitHub account</span> and hook it using Shopify's native <strong>"Connect from GitHub"</strong> library channel. Everything is fully optimized to install perfectly!
               </div>
             </div>
           </div>
@@ -258,17 +193,17 @@ export default function App() {
             
             {/* Left sidebar: File Tree Directory list */}
             <div className="lg:col-span-4 space-y-4">
-              <div className="rounded-xl border border-zinc-904 bg-[#0a0a0a] p-5">
-                <h4 className="font-mono text-[10px] font-black text-white uppercase tracking-wider mb-4 border-b border-zinc-900 pb-3 flex items-center justify-between">
-                  <span>📁 Repositories Files System</span>
-                  <span className="text-zinc-550">[ branch: main ]</span>
+              <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm">
+                <h4 className="font-mono text-[10px] font-black text-zinc-900 uppercase tracking-wider mb-4 border-b border-zinc-150 pb-3 flex items-center justify-between">
+                  <span>📁 Theme Folder Tree</span>
+                  <span className="text-zinc-400">[ branch: main ]</span>
                 </h4>
 
                 {/* Sub-categories layout viewports */}
-                <div className="space-y-5">
+                <div className="space-y-4">
                   {(["layout", "templates", "sections", "config", "locales", "documentation"] as const).map((category) => (
-                    <div key={category} className="space-y-1.5">
-                      <span className="font-mono text-[9.5px] font-bold text-zinc-550 uppercase tracking-widest block pl-2">
+                    <div key={category} className="space-y-1">
+                      <span className="font-mono text-[9.5px] font-bold text-zinc-400 uppercase tracking-widest block pl-2">
                         {category}/
                       </span>
                       <div className="space-y-1">
@@ -276,22 +211,22 @@ export default function App() {
                           <button
                             key={file.path}
                             onClick={() => setSelectedShopifyFile(file)}
-                            className={`w-full text-left font-mono text-[11px] px-3 py-2 rounded-md transition-all flex items-center justify-between border ${
+                            className={`w-full text-left font-mono text-[11px] px-3 py-2 rounded-lg transition-all flex items-center justify-between border cursor-pointer ${
                               selectedShopifyFile.path === file.path
-                                ? "bg-[#0f210d] border-[#39ff14]/30 text-white font-bold"
-                                : "bg-[#040404] hover:bg-zinc-950 border-zinc-950 text-zinc-400 hover:text-white"
+                                ? "bg-zinc-900 border-zinc-900 text-white font-bold"
+                                : "bg-zinc-50 hover:bg-zinc-100 border-zinc-200 text-zinc-600"
                             }`}
                           >
                             <span className="flex items-center space-x-2 overflow-hidden truncate mr-1">
-                              <FileCode className="h-3.5 w-3.5 text-zinc-500 shrink-0" />
+                              <FileCode className="h-3.5 w-3.5 text-zinc-400 shrink-0" />
                               <span className="truncate">{file.path.split("/")[1] || file.path}</span>
                             </span>
-                            <span className={`text-[9px] px-1.5 py-0.2 rounded font-bold uppercase ${
+                            <span className={`text-[8.5px] px-1.5 py-0.2 rounded font-bold uppercase ${
                               file.language === "json" 
-                                ? "text-cyan-400 bg-cyan-950/40 border border-cyan-800/30"
+                                ? "text-cyan-805 bg-cyan-50 border border-cyan-150"
                                 : file.language === "markdown"
-                                ? "text-amber-400 bg-amber-950/40 border border-amber-800/30"
-                                : "text-emerald-400 bg-emerald-950/40 border border-emerald-800/20"
+                                ? "text-amber-805 bg-amber-50 border border-amber-150"
+                                : "text-emerald-805 bg-emerald-50 border border-emerald-150"
                             }`}>
                               {file.language}
                             </span>
@@ -304,27 +239,27 @@ export default function App() {
               </div>
 
               {/* In store tips coordinator */}
-              <div className="rounded-xl border border-zinc-900 bg-zinc-950 p-5 space-y-3 font-sans">
-                <h5 className="font-mono text-[10px] font-bold text-[#39FF14] uppercase flex items-center space-x-1">
+              <div className="rounded-2xl border border-zinc-200 bg-zinc-50/50 p-4 space-y-2.5 font-sans shadow-sm">
+                <h5 className="font-mono text-[9.5px] font-bold text-zinc-800 uppercase flex items-center space-x-1">
                   <span>★</span>
                   <span>PREVIEW COMPONENT INSIGHT</span>
                 </h5>
-                <p className="text-[11px] text-zinc-500 leading-relaxed leading-normal">
-                  Our custom Dawn extensions integrate same-day in-store pick-up and local NAGPUR student promotion algorithms in dynamic schemas so you don't lose any of your brand's unique identity during transition. Everything is ready-to-publish!
+                <p className="text-[11px] text-zinc-500 leading-normal">
+                  Our custom Liquid schema structures hook with default cart flows, letting Shopify take care of processing tax, payment gateways, and shipping parameters seamlessly.
                 </p>
               </div>
             </div>
 
             {/* Right container panel: Selected File Code Viewport */}
             <div className="lg:col-span-8 space-y-4">
-              <div className="rounded-xl border border-zinc-900 bg-[#0a0a0a] overflow-hidden flex flex-col h-full">
+              <div className="rounded-2xl border border-zinc-200 bg-white overflow-hidden flex flex-col h-full shadow-sm">
                 
                 {/* File Header Bar metadata */}
-                <div className="bg-black border-b border-zinc-900 p-4 shrink-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <div className="bg-zinc-50 border-b border-zinc-150 p-4 shrink-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <div>
                     <div className="flex items-center space-x-2">
-                      <span className="font-mono text-[10px] text-[#39FF14]">{selectedShopifyFile.category}/</span>
-                      <h3 className="font-mono text-sm font-black text-white">{selectedShopifyFile.path}</h3>
+                      <span className="font-mono text-[10px] text-zinc-400 font-bold">{selectedShopifyFile.category}/</span>
+                      <h3 className="font-mono text-sm font-black text-zinc-900">{selectedShopifyFile.path}</h3>
                     </div>
                     <p className="text-[11px] text-zinc-500 mt-0.5 font-sans leading-normal">
                       {selectedShopifyFile.description}
@@ -333,37 +268,37 @@ export default function App() {
 
                   <button
                     onClick={() => handleCopyCode(selectedShopifyFile.content, selectedShopifyFile.path)}
-                    className="self-start sm:self-center flex items-center space-x-1.5 rounded-lg border border-zinc-800 hover:border-[#39ff14]/30 bg-zinc-950 hover:bg-black px-4 py-2 text-[10.5px] font-mono font-bold text-zinc-300 hover:text-white transition-all shrink-0"
+                    className="self-start sm:self-center flex items-center space-x-1.5 rounded-lg border border-zinc-250 hover:bg-zinc-100 bg-white px-4 py-2 text-[10.5px] font-mono font-bold text-zinc-700 transition-all shrink-0 cursor-pointer"
                     id="dev-copy-action-btn"
                   >
                     {copiedStatus === selectedShopifyFile.path ? (
                       <>
-                        <Check className="h-3.5 w-3.5 text-emerald-400" />
-                        <span className="text-emerald-400">COPIED TO CLIPBOARD</span>
+                        <Check className="h-3.5 w-3.5 text-emerald-600" />
+                        <span className="text-emerald-600 font-bold">COPIED</span>
                       </>
                     ) : (
                       <>
                         <Copy className="h-3.5 w-3.5" />
-                        <span>COPY RAW FILE CODE</span>
+                        <span>COPY FORM LIQUID</span>
                       </>
                     )}
                   </button>
                 </div>
 
                 {/* Code Window Box */}
-                <div className="p-4 bg-black overflow-auto font-mono text-xs text-zinc-400 max-h-[580px] scrollbar-thin">
+                <div className="p-4 bg-zinc-950 overflow-auto font-mono text-xs text-zinc-300 max-h-[580px] scrollbar-thin">
                   <pre className="select-all leading-relaxed whitespace-pre font-mono">
                     {selectedShopifyFile.content}
                   </pre>
                 </div>
 
                 {/* Footer warning indicators */}
-                <div className="bg-[#0e0e0e] border-t border-zinc-900 p-4 shrink-0 flex items-center justify-between font-mono text-[10px] text-zinc-650">
+                <div className="bg-zinc-50 border-t border-zinc-150 p-3 shrink-0 flex items-center justify-between font-mono text-[10px] text-zinc-400 font-bold">
                   <span className="flex items-center space-x-1.5">
                     <Terminal className="h-3.5 w-3.5" />
-                    <span>UTILITY COMPILER OK</span>
+                    <span>SYNCHRONISED STATUS_OK</span>
                   </span>
-                  <span>ENVELOPE LIQUID: UTF-8</span>
+                  <span>ENCODE: UTF-8</span>
                 </div>
 
               </div>
@@ -374,75 +309,78 @@ export default function App() {
         </div>
       )}
 
-      {/* ==================== DIRECT "BUY NOW" CHECKOUT SIMULATOR POP-UP ==================== */}
+      {/* ==================== DIRECT "BUY NOW" SIMULATOR DIALOGUE ==================== */}
       {showCheckoutSimulator && simulatedCheckoutItem && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          {/* Blur backdrop */}
           <div 
             onClick={() => setShowCheckoutSimulator(false)}
-            className="absolute inset-0 bg-black/92 backdrop-blur-md"
+            className="absolute inset-0 bg-zinc-900/60 backdrop-blur-sm"
           />
 
-          <div className="relative w-full max-w-md rounded-xl border border-[#39FF14]/30 bg-[#060606] p-6 shadow-2xl text-left" id="native-checkout-simulation-box">
+          <div className="relative w-full max-w-sm rounded-2xl border border-zinc-200 bg-white p-5 shadow-xl text-left z-10" id="native-checkout-simulation-box">
             
-            <div className="flex items-center space-x-3 mb-5 border-b border-zinc-900 pb-4">
-              <div className="rounded-md bg-[#0f210d] border border-[#39ff14]/35 p-2 text-[#39FF14]">
-                <Store className="h-5 w-5" />
+            <div className="flex items-center space-x-3 mb-4 border-b border-zinc-150 pb-3">
+              <div className="rounded-xl bg-[#22c55e]/10 border border-[#22c55e]/20 p-2 text-[#15803d]">
+                <CreditCard className="h-5 w-5" />
               </div>
               <div>
-                <span className="font-mono text-[9px] font-bold text-[#39FF14] tracking-widest uppercase block">[ DIRECT NATIVE ACTION ]</span>
-                <h3 className="font-sans text-base font-black text-white uppercase tracking-tight">SHOPIFY NATIVE CHECKOUT SIMULATOR</h3>
+                <span className="font-mono text-[9px] font-bold text-[#15803d] tracking-widest uppercase block">[ DIRECT NATIVE TRANSACTION ]</span>
+                <h3 className="font-sans text-base font-black text-zinc-900 uppercase tracking-tight">Shopify Checkout Redirect</h3>
               </div>
             </div>
 
             <div className="space-y-4">
               
-              <div className="rounded-lg bg-zinc-950 p-4.5 border border-zinc-900 space-y-2.5">
-                <div className="flex justify-between text-xs font-mono font-bold text-zinc-400">
-                  <span>ITEM READY FOR CART REDIRECT:</span>
-                  <span className="text-[#39FF14] uppercase">VAR_CONFIRMED</span>
+              <div className="rounded-xl bg-zinc-50 p-4 border border-zinc-200 space-y-2">
+                <div className="flex justify-between text-[10px] font-mono font-bold text-zinc-400">
+                  <span>CART REDIRECT PARAMS:</span>
+                  <span className="text-[#15803d] uppercase font-black">NATIVE_OK</span>
                 </div>
-                <div className="space-y-1">
-                  <p className="font-sans text-sm font-black text-white">{simulatedCheckoutItem.name}</p>
-                  <p className="font-mono text-[11px] text-zinc-550">Selected Fit: <span className="text-white font-bold">{simulatedCheckoutItem.size}</span></p>
-                  <p className="font-sans text-[#39FF14] font-black text-sm mt-1">₹{simulatedCheckoutItem.price}</p>
+                <div className="space-y-0.5">
+                  <p className="font-sans text-[13px] font-black text-zinc-900">{simulatedCheckoutItem.name}</p>
+                  <p className="font-mono text-[10.5px] text-zinc-500">
+                    Selected Variant: <span className="font-bold text-zinc-850">{simulatedCheckoutItem.color} / {simulatedCheckoutItem.size}</span>
+                  </p>
+                  <p className="font-mono text-[10.5px] text-zinc-500">
+                    Quantity: <span className="font-bold text-zinc-850">{simulatedCheckoutItem.qty}x</span>
+                  </p>
+                  <p className="font-sans text-[#15803d] font-black text-sm mt-1">₹{simulatedCheckoutItem.price * simulatedCheckoutItem.qty}</p>
                 </div>
               </div>
 
-              {/* Explanation note highlighting why direct buy button replaces whatsapp */}
-              <div className="text-[11.5px] font-sans text-zinc-500 leading-relaxed leading-normal space-y-2">
+              {/* Direct Shopify Flow Logic Description */}
+              <div className="text-[11px] font-sans text-zinc-550 leading-relaxed space-y-2">
                 <p>
-                  This item is now configured for your **Direct Shopify Checkout**. When active on your live Shopify domain, clicking this button submits the variant directly into:
+                  On your live custom theme, pressing **Direct Buy Now** instantly triggers your store's native checkout sequence, committing:
                 </p>
-                <code className="block bg-black border border-zinc-900 p-2.5 rounded font-mono text-[10px] text-emerald-400 break-all">
-                  /cart/add?id=VARIANT_ID&quantity=1 &rarr; /checkout
+                <code className="block bg-zinc-950 p-2 rounded font-mono text-[9.5px] text-emerald-400 break-all leading-tight">
+                  POST /cart/add.js?id=VARIANT_ID&qty={simulatedCheckoutItem.qty} &rarr; redirect /checkout
                 </code>
-                <p className="text-zinc-650">
-                  No manual texting or manual admin intervention needed. Native Shopify shipping, taxes, and automatic stock deductions are locked-in immediately!
+                <p className="text-zinc-450 leading-normal">
+                  All taxes, courier selections, dynamic discount codes, and local payment methods will route natively through Shopify backend nodes. No manual WhatsApp coordination is required!
                 </p>
               </div>
 
             </div>
 
-            <div className="mt-6 pt-4 border-t border-zinc-900 flex flex-col gap-2.5">
+            <div className="mt-5 pt-3 border-t border-zinc-150 flex flex-col gap-2">
               <button
                 onClick={() => {
                   setShowCheckoutSimulator(false);
                   setActiveView("shopify-dir");
-                  // Focus onto main-product section inside liquid tree so they can inspect it
                   const targetIndex = SHOPIFY_FILES.findIndex(f => f.path === "sections/main-product.liquid");
                   if (targetIndex > -1) setSelectedShopifyFile(SHOPIFY_FILES[targetIndex]);
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 }}
-                className="w-full rounded bg-[#39FF14] text-black hover:bg-white font-mono text-[11px] font-black py-3 px-4 transition-colors uppercase tracking-wider text-center block select-none cursor-pointer"
+                className="w-full rounded-xl bg-zinc-900 text-white hover:bg-zinc-800 font-mono text-[10.5px] font-black py-3 px-4 transition-colors uppercase tracking-wider text-center block cursor-pointer"
               >
-                Inspect Shopify Native Form Liquid &rarr;
+                Inspect Liquid Buy Now Forms &rarr;
               </button>
               <button
                 onClick={() => setShowCheckoutSimulator(false)}
-                className="w-full rounded border border-zinc-900 hover:border-zinc-800 bg-transparent text-zinc-400 hover:text-white font-mono text-[10.5px] font-bold py-2.5 px-4 transition-colors text-center"
+                className="w-full rounded-xl border border-zinc-200 hover:bg-zinc-50 bg-white text-zinc-500 hover:text-zinc-850 font-mono text-[10px] font-bold py-2 px-4 transition-colors text-center cursor-pointer"
               >
-                Keep Browsing Preview
+                Continue Browsing Catalog
               </button>
             </div>
 
