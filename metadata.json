@@ -1,0 +1,6 @@
+{
+  "name": "Escape Clothing 17",
+  "description": "Modern streetwear landing page for Escape Clothing 17, featuring high-quality deals on fabric, jackets, jerseys, cargos, polo shirts, and more with instant WhatsApp or Instagram order capabilities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
