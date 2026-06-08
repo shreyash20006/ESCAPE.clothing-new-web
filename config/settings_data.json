@@ -1,0 +1,29 @@
+{
+  "current": {
+    "sections": {
+      "hero": {
+        "type": "hero",
+        "settings": {
+          "title": "ESCAPE THE STANDARD DEALS",
+          "subheading": "Premium Heavy Weaves. Curated Streetwear Packs for Campus Legends.",
+          "button_label": "EXPLORE RACKS",
+          "badge_text": " NAGPUR STORE LAUNCH V1.7 "
+        }
+      }
+    },
+    "settings": {
+      "color_bg": "#050505",
+      "color_neon": "#39FF14",
+      "color_text": "#ffffff",
+      "operator_suresh": "+91 82610 94774",
+      "operator_rohit": "+91 90223 41807"
+    }
+  },
+  "presets": {
+    "Default": {
+      "color_bg": "#050505",
+      "color_neon": "#39FF14",
+      "color_text": "#ffffff"
+    }
+  }
+}

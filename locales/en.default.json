@@ -1,0 +1,21 @@
+{
+  "general": {
+    "search": {
+      "search": "Search Drops",
+      "results_with_count": {
+        "one": "Found {{ count }} streetwear fit",
+        "other": "Found {{ count }} streetwear fits"
+      }
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "ADD TO BAG",
+      "sold_out": "DROP CONCLUDED",
+      "price": {
+        "regular_price": "Regular Price",
+        "sale_price": "Nagpur Special Promo Price"
+      }
+    }
+  }
+}

@@ -1,0 +1,453 @@
+{% comment %}
+  ESCAPE CLOTHING 17 - NATIVE STREETWEAR PRODUCT GRID
+{% endcomment %}
+<section id="featured-collection" class="collection-section">
+  <div class="container">
+    
+    <!-- Dynamic Header -->
+    <div class="collection-header">
+      <div class="header-pre">
+        <span class="square-icon"></span>
+        [ {{ section.settings.title | uppercase }} ]
+      </div>
+      <h2 class="header-title">{{ section.settings.title }}</h2>
+      {%- if section.settings.subheading != blank -%}
+        <p class="header-desc">{{ section.settings.subheading }}</p>
+      {%- endif -%}
+    </div>
+
+    <!-- Collection Grid -->
+    {%- assign target_collection = collections[section.settings.collection_handle] -%}
+    <div class="product-grid">
+      {%- if target_collection != blank and target_collection.products.size > 0 -%}
+        {%- for product in target_collection.products limit: section.settings.limit -%}
+          <div class="product-card">
+            <a href="{{ product.url }}" class="card-image-link">
+              {%- if product.compare_at_price > product.price -%}
+                <span class="card-badge sale-badge">DEAL</span>
+              {%- endif -%}
+              {%- if product.tags contains 'BestSeller' or product.tags contains 'best-seller' -%}
+                <span class="card-badge bestseller-badge">BEST SELLER</span>
+              {%- endif -%}
+              
+              <div class="image-box">
+                {%- if product.featured_image != blank -%}
+                  <img 
+                    src="{{ product.featured_image | image_url: width: 600 }}" 
+                    alt="{{ product.title | escape }}" 
+                    class="grid-img"
+                    loading="lazy"
+                  >
+                {%- else -%}
+                  <!-- Fallback stylish graphic if no image loaded -->
+                  <div class="fallback-graphic">[ ESCAPE PREMIUM WEAVE ]</div>
+                {%- endif -%}
+                <div class="card-hover-overlay">
+                  <span class="tap-hint">VIEW FIT BLUEPRINT &rarr;</span>
+                </div>
+              </div>
+            </a>
+
+            <div class="card-info">
+              <span class="product-sku">{{ product.type | default: "STREETWEAR" | uppercase }}</span>
+              <h3 class="product-title-text">
+                <a href="{{ product.url }}">{{ product.title }}</a>
+              </h3>
+
+              <div class="price-row">
+                <div class="prices">
+                  <span class="current-price">{{ product.price | money }}</span>
+                  {%- if product.compare_at_price > product.price -%}
+                    <span class="compare-price">{{ product.compare_at_price | money }}</span>
+                  {%- endif -%}
+                </div>
+                <div class="card-actions">
+                  <span class="flat-tag">₹999 BUNDLE APPLICABLE</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Mock products if Shopify database collection is currently empty / newly provisioned -->
+        <!-- This delivers 100% production fidelity during fresh installs! -->
+        <div class="empty-state-notice">
+          <p class="empty-desc">
+            No products active in collection <strong>"{{ section.settings.collection_handle | default: 'all' }}"</strong>. 
+            Once you seed your Shopify products catalog, they will stream here live! Here is how your dark layout structure will render:
+          </p>
+
+          <div class="placeholder-grid">
+            <!-- Mock Product 1 -->
+            <div class="product-card mock-card">
+              <div class="image-box">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=400&auto=format&fit=crop" class="grid-img" alt="mock">
+                <span class="card-badge bestseller-badge">BEST SELLER</span>
+              </div>
+              <div class="card-info text-left">
+                <span class="product-sku">JERSEYS</span>
+                <h3 class="product-title-text"><a href="#">Seoul Team Varsity Retro Jersey</a></h3>
+                <div class="price-row">
+                  <div class="prices">
+                    <span class="current-price">₹399</span>
+                    <span class="compare-price">₹799</span>
+                  </div>
+                  <span class="flat-tag">CUSTOM DIG. CATALOG</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mock Product 2 -->
+            <div class="product-card mock-card">
+              <div class="image-box">
+                <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=400&auto=format&fit=crop" class="grid-img" alt="mock">
+                <span class="card-badge sale-badge">DEAL</span>
+              </div>
+              <div class="card-info text-left">
+                <span class="product-sku">CARGOS</span>
+                <h3 class="product-title-text"><a href="#">Stealth Dual-Strap 6-Pocket Cargo</a></h3>
+                <div class="price-row">
+                  <div class="prices">
+                    <span class="current-price">₹499</span>
+                    <span class="compare-price">₹999</span>
+                  </div>
+                  <span class="flat-tag">CUSTOM DIG. CATALOG</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mock Product 3 -->
+            <div class="product-card mock-card">
+              <div class="image-box">
+                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=400&auto=format&fit=crop" class="grid-img" alt="mock">
+              </div>
+              <div class="card-info text-left">
+                <span class="product-sku">OVERSIZED TEES</span>
+                <h3 class="product-title-text"><a href="#">Heavy-Hitter Boxy Blank Tee (240 GSM)</a></h3>
+                <div class="price-row">
+                  <div class="prices">
+                    <span class="current-price">₹349</span>
+                    <span class="compare-price">₹699</span>
+                  </div>
+                  <span class="flat-tag">CUSTOM DIG. CATALOG</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .collection-section {
+    background: #050505;
+    padding: 5rem 0;
+    border-bottom: 1px solid #141414;
+  }
+
+  .collection-header {
+    margin-bottom: 3.5rem;
+    text-align: left;
+  }
+
+  .header-pre {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    color: var(--color-neon-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .square-icon {
+    width: 6px;
+    height: 6px;
+    background: var(--color-neon-primary);
+    display: inline-block;
+  }
+
+  .header-title {
+    font-family: var(--font-display);
+    font-size: 1.85rem;
+    font-weight: 900;
+    line-height: 1.1;
+    color: #ffffff;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+
+  @media (min-width: 768px) {
+    .header-title {
+      font-size: 2.5rem;
+    }
+  }
+
+  .header-desc {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: #666666;
+    margin: 0.75rem 0 0 0;
+    max-width: 600px;
+  }
+
+  /* Responsive Streetwear Products Grid */
+  .product-grid {
+    width: 100%;
+  }
+
+  .product-card {
+    background: #090909;
+    border: 1px solid #111111;
+    border-radius: 12px;
+    padding: 0.65rem;
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-card:hover {
+    border-color: #222;
+    transform: translateY(-4px);
+    box-shadow: 0 16px 30px rgba(0,0,0,0.7);
+  }
+
+  .card-image-link {
+    text-decoration: none;
+    position: relative;
+    display: block;
+    aspect-ratio: 4/5;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .image-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .grid-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: color-dodge;
+  }
+
+  .fallback-graphic {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: #333;
+    text-transform: uppercase;
+    border: 1px dashed #222;
+    border-radius: 6px;
+  }
+
+  .card-badge {
+    position: absolute;
+    top: 0.85rem;
+    left: 0.85rem;
+    z-index: 5;
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 900;
+    padding: 0.3rem 0.55rem;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .sale-badge {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .bestseller-badge {
+    background: var(--color-neon-primary);
+    color: #000000;
+  }
+
+  .card-hover-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .product-card:hover .card-hover-overlay {
+    opacity: 1;
+  }
+
+  .tap-hint {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--color-neon-primary);
+    border: 1px solid rgba(57, 255, 20, 0.3);
+    padding: 0.5rem 0.85rem;
+    border-radius: 4px;
+    background: #0a0e08;
+  }
+
+  .card-info {
+    padding: 0.85rem 0.35rem 0.35rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .product-sku {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 900;
+    color: #555555;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.35rem;
+    display: block;
+  }
+
+  .product-title-text {
+    margin: 0 0 0.85rem 0;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .product-title-text a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .product-title-text a:hover {
+    color: var(--color-neon-primary);
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    border-top: 1px solid #141414;
+    padding-top: 0.75rem;
+  }
+
+  .prices {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+  }
+
+  .current-price {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 900;
+    color: #ffffff;
+  }
+
+  .compare-price {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: #444444;
+    text-decoration: line-through;
+  }
+
+  .flat-tag {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: var(--color-neon-primary);
+    background: rgba(57, 255, 20, 0.05);
+    padding: 0.15rem 0.35rem;
+    border-radius: 2px;
+  }
+
+  /* Empty state rendering schema template grid */
+  .empty-state-notice {
+    padding: 2.5rem 1.5rem;
+    background: #080808;
+    border: 1px solid #141414;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .empty-desc {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: #666666;
+    max-width: 650px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.5;
+  }
+
+  .placeholder-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 576px) {
+    .placeholder-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 992px) {
+    .placeholder-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Streetwear Grid Drops",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading Text",
+      "default": "THE DIGITAL DIRECTORY"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Description Detail",
+      "default": "Browse limited Nagpur stocks available today. Fabric deals at their absolute peak."
+    },
+    {
+      "type": "collection",
+      "id": "collection_handle",
+      "label": "Select Collection Source"
+    },
+    {
+      "type": "number",
+      "id": "limit",
+      "label": "Item Listing Size",
+      "default": 3
+    }
+  ],
+  "presets": [
+    {
+      "name": "Streetwear Grid Drops",
+      "category": "Custom UI Pieces"
+    }
+  ]
+}
+{% endschema %}

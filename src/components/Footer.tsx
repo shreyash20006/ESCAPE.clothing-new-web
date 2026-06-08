@@ -53,7 +53,7 @@ export default function Footer({ onScrollToSection }: FooterProps) {
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
                 <div className="h-1 w-5 bg-[#39FF14] rounded"></div>
-                <h4 className="font-mono text-[10px] font-bold text-white tracking-widest uppercase">DIRECT NAGPUR CONTACT BLUEPRINT:</h4>
+                <h4 className="font-mono text-[10px] font-bold text-white tracking-widest uppercase">DIRECT NAGPUR CONTACT OPERATORS:</h4>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" id="footer-contact-operators">
@@ -149,7 +149,7 @@ export default function Footer({ onScrollToSection }: FooterProps) {
             <div className="rounded-lg bg-zinc-950/40 border border-zinc-900 p-4 font-mono text-[10.5px] text-zinc-500 leading-normal flex items-start space-x-2.5">
               <span className="text-[#39FF14] font-bold">★</span>
               <p>
-                <span className="text-white font-bold">Nagpur Student Tip:</span> Eliminate delivery wait times! Assemble your blueprint cart online, click to send via WhatsApp, and pick it up the very same day at our physical City Center store. Suresh or Rohit will assist with testing fits!
+                <span className="text-white font-bold">Nagpur Student Tip:</span> Eliminate delivery wait times! Assemble your bag selection online, click to send via WhatsApp, and pick it up the very same day at our physical City Center store. Suresh or Rohit will assist with testing fits!
               </p>
             </div>
           </div>

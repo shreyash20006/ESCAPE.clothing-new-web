@@ -1,0 +1,197 @@
+{% comment %}
+  ESCAPE CLOTHING 17 - NATIVE HEADER HUD
+{% endcomment %}
+<header class="escape-header">
+  <div class="escape-header-container">
+    <div class="header-brand">
+      <a href="/" class="brand-link">
+        <span class="brand-badge">ESCAPE CLOTHING 17</span>
+        <span class="brand-sub">NAGPUR STREETWEAR</span>
+      </a>
+    </div>
+
+    <nav class="header-nav">
+      <ul class="nav-links">
+        {%- for link in linklists.main-menu.links -%}
+          <li>
+            <a href="{{ link.url }}" class="nav-link {% if link.active %}active{% endif %}">
+              [ {{ link.title | uppercase }} ]
+            </a>
+          </li>
+        {%- else -%}
+          <li><a href="/collections/all" class="nav-link">[ STORE RACKS ]</a></li>
+          <li><a href="/collections/jerseys" class="nav-link">[ JERSEYS ]</a></li>
+          <li><a href="/collections/streetwear-tops" class="nav-link">[ STREETWEAR TOPS ]</a></li>
+          <li><a href="/collections/bottoms-cargos" class="nav-link">[ BOTTOMS & CARGOS ]</a></li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="https://www.instagram.com/escape_clothing17" target="_blank" class="action-btn social-link">
+        <span class="pulse-dot"></span>
+        INSTAGRAM SQUAD
+      </a>
+      <a href="/cart" class="action-btn cart-link border-neon">
+        BAG
+        <span class="cart-bubble">{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .escape-header {
+    background: #000000;
+    border-bottom: 1px solid #141414;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(12px);
+    width: 100%;
+  }
+
+  .escape-header-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-brand {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand-link {
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .brand-badge {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    display: block;
+    line-height: 1;
+    color: #ffffff;
+  }
+
+  .brand-sub {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.35em;
+    color: #555555;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 0.25rem;
+  }
+
+  .header-nav {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .header-nav {
+      display: block;
+    }
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.8rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: #888888;
+    transition: color 0.15s ease;
+  }
+
+  .nav-link:hover, .nav-link.active {
+    color: var(--color-neon-primary);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .action-btn {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 0.5rem 0.85rem;
+    border-radius: 99px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: all 0.2s ease;
+  }
+
+  .social-link {
+    background: #0d0d0d;
+    color: #ffffff;
+    border: 1px solid #222;
+  }
+
+  .social-link:hover {
+    border-color: rgba(57, 255, 20, 0.3);
+    color: var(--color-neon-primary);
+  }
+
+  .cart-link {
+    background: #11290d;
+    color: var(--color-neon-primary);
+    border: 1px solid rgba(57, 255, 20, 0.35);
+  }
+
+  .cart-link:hover {
+    background: var(--color-neon-primary);
+    color: #000000;
+    border-color: var(--color-neon-primary);
+  }
+
+  .cart-bubble {
+    background: #ffffff;
+    color: #000000;
+    border-radius: 99px;
+    padding: 0.1rem 0.35rem;
+    font-size: 0.55rem;
+    font-weight: 900;
+  }
+
+  .pulse-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--color-neon-primary);
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 8px var(--color-neon-primary);
+    animation: pulse 1.8s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(0.9); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.7; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Header Blueprint",
+  "settings": []
+}
+{% endschema %}

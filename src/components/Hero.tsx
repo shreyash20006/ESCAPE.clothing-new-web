@@ -182,7 +182,7 @@ export default function Hero({ onScrollToSection }: HeroProps) {
                 </div>
 
                 <div className="absolute top-4 left-4 rounded-md border border-zinc-800 bg-black/80 px-3 py-1 font-mono text-[9px] text-[#39FF14] backdrop-blur-sm">
-                  LAUNCH SPECIAL V1.7
+                  PREMIUM HEAVY WEAVE
                 </div>
 
                 <div className="absolute top-4 right-4 h-11 w-11 rounded-full border border-[#39FF14]/40 bg-zinc-950 p-0.5 shadow-lg">

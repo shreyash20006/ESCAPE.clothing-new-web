@@ -1,0 +1,50 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Escape Clothing 17 Streetwear Blueprint",
+    "theme_version": "1.7.0",
+    "theme_author": "Escape Clothing NAGPUR Design",
+    "theme_documentation_url": "https://escapeclothing17.com",
+    "theme_support_url": "https://escapeclothing17.com"
+  },
+  {
+    "name": "Streetwear Branding Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Store Background Color",
+        "default": "#050505"
+      },
+      {
+        "type": "color",
+        "id": "color_neon",
+        "label": "Primary Neon Signature Line",
+        "default": "#39FF14"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Standard Font Color",
+        "default": "#FFFFFF"
+      }
+    ]
+  },
+  {
+    "name": "Nagpur Operations Hotline",
+    "settings": [
+      {
+        "type": "text",
+        "id": "operator_suresh",
+        "label": "Suresh Contact Line",
+        "default": "+91 82610 94774"
+      },
+      {
+        "type": "text",
+        "id": "operator_rohit",
+        "label": "Rohit Contact Line",
+        "default": "+91 90223 41807"
+      }
+    ]
+  }
+]

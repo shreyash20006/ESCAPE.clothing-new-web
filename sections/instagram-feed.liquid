@@ -1,0 +1,256 @@
+{% comment %}
+  ESCAPE CLOTHING 17 - NATIVE INSTAGRAM LOOKBOOK FEED
+{% endcomment %}
+<section class="lookbook-section" id="social-community">
+  <div class="container hover-transition">
+    
+    <div class="lookbook-layout">
+      <!-- Info Left Column -->
+      <div class="lookbook-intro">
+        <span class="social-tag">
+          <span class="laser-flare"></span>
+          @ESCAPE_CLOTHING17 SQUAD FEED
+        </span>
+        <h3 class="lookbook-title">{{ section.settings.title }}</h3>
+        <p class="lookbook-desc">{{ section.settings.subheading }}</p>
+
+        <a href="https://www.instagram.com/escape_clothing17?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="squad-btn">
+          FOLLOW THE STATION
+          <svg class="external-icon" viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+      </div>
+
+      <!-- Feed Grid Right Column -->
+      <div class="lookbook-grid">
+        
+        <!-- Post 1 -->
+        <div class="look-tile">
+          <div class="tile-aspect">
+            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=400&auto=format&fit=crop" alt="lookbook" class="tile-image">
+            <div class="tile-meta">
+              <span class="likes-count">❤️ 1,248</span>
+              <p class="caption-snippet">Aesthetic check. Seoul Team retro jerseys.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Post 2 -->
+        <div class="look-tile">
+          <div class="tile-aspect">
+            <img src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=400&auto=format&fit=crop" alt="lookbook" class="tile-image">
+            <div class="tile-meta">
+              <span class="likes-count">❤️ 942</span>
+              <p class="caption-snippet">Six pockets twill cargos on campus rotation.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Post 3 -->
+        <div class="look-tile">
+          <div class="tile-aspect">
+            <img src="https://images.unsplash.com/photo-1509281373149-e957c6296406?q=80&w=400&auto=format&fit=crop" alt="lookbook" class="tile-image">
+            <div class="tile-meta">
+              <span class="likes-count">❤️ 2,019</span>
+              <p class="caption-snippet">The ultimate mock neck tee (240 GSM).</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .lookbook-section {
+    background: #000000;
+    padding: 5rem 0;
+    border-bottom: 1px solid #141414;
+  }
+
+  .lookbook-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  @media (min-width: 992px) {
+    .lookbook-layout {
+      grid-template-columns: 0.82fr 1.18fr;
+      gap: 5rem;
+    }
+  }
+
+  /* Intro columns descriptions */
+  .lookbook-intro {
+    background: #060606;
+    border: 1px solid #111;
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+  }
+
+  .social-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    color: var(--color-neon-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-bottom: 1rem;
+  }
+
+  .laser-flare {
+    width: 6px;
+    height: 6px;
+    background: var(--color-neon-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--color-neon-primary);
+  }
+
+  .lookbook-title {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.01em;
+  }
+
+  .lookbook-desc {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.55;
+    margin: 0 0 2rem 0;
+  }
+
+  .squad-btn {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid #222;
+    padding: 0.85rem 1.35rem;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all 0.2s ease;
+  }
+
+  .squad-btn:hover {
+    border-color: var(--color-neon-primary);
+    color: var(--color-neon-primary);
+    background: rgba(57, 255, 20, 0.02);
+  }
+
+  .external-icon {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Grid details */
+  .lookbook-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 576px) {
+    .lookbook-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .look-tile {
+    background: #090909;
+    border: 1px solid #141414;
+    padding: 0.4rem;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .tile-aspect {
+    position: relative;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .tile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: color-dodge;
+    transition: transform 0.4s ease;
+  }
+
+  .look-tile:hover .tile-image {
+    transform: scale(1.06);
+  }
+
+  .tile-meta {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 1.25rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .look-tile:hover .tile-meta {
+    opacity: 1;
+  }
+
+  .likes-count {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: var(--color-neon-primary);
+    margin-bottom: 0.45rem;
+  }
+
+  .caption-snippet {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    color: #666;
+    line-height: 1.4;
+    margin: 0;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Lookbook Block",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading Text",
+      "default": "SQUAD LOOKBOOK"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading Details",
+      "default": "Real people, real fits. Ready to represent? Tag us on Instagram to lock in exclusive premium rate privileges."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lookbook Block",
+      "category": "Custom UI Pieces"
+    }
+  ]
+}
+{% endschema %}

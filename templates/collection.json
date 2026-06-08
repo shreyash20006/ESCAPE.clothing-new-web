@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "banner": {
+      "type": "hero",
+      "settings": {
+        "title": "COLLECTION CATALOG",
+        "subheading": "Heavy-density fabrics prepared with elite durability specifications.",
+        "button_label": "VIEW BLUEPRINTS"
+      }
+    },
+    "main-grid": {
+      "type": "main-collection",
+      "settings": {
+        "title": "CURRENT DROPS",
+        "subheading": "Limited quantities available. Real-time updates based on Nagpur walk-ins.",
+        "limit": 9
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "main-grid"
+  ]
+}

@@ -1,0 +1,650 @@
+{% comment %}
+  ESCAPE CLOTHING 17 - NATIVE HIGH-CONVERSION PRODUCT DETAIL PAGE
+  Features dynamic size variant dropdown, quantity control, and standard Direct Buy Now buttons!
+{% endcomment %}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<section class="escape-product-section" id="product-detail-{{ product.id }}">
+  <div class="container hover-transition">
+    
+    <div class="product-layout-grid">
+      
+      <!-- Left: Gallery Showcase -->
+      <div class="product-visuals">
+        <div class="active-focus-wrapper">
+          <div class="badge-overlay">
+            {%- if product.compare_at_price > product.price -%}
+              <span class="detail-badge-red">[ PROMO DROP COVETED ]</span>
+            {%- else -%}
+              <span class="detail-badge-neon">[ LUXURY FABRIC ]</span>
+            {%- endif -%}
+          </div>
+
+          {%- if product.featured_image != blank -%}
+            <img 
+              src="{{ product.featured_image | image_url: width: 1000 }}" 
+              alt="{{ product.title | escape }}" 
+              class="active-large-image"
+              loading="eager"
+            >
+          {%- else -%}
+            <!-- Fallback Mock Asset for new dev install -->
+            <img 
+              src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=600&auto=format&fit=crop" 
+              alt="Escape default mock fabric drop"
+              class="active-large-image"
+            >
+          {%- endif -%}
+        </div>
+
+        {%- if product.images.size > 1 -%}
+          <div class="gallery-thumbs">
+            {%- for image in product.images -%}
+              <div class="thumb-frame {% if forloop.first %}selected{% endif %}">
+                <img src="{{ image | image_url: width: 140 }}" alt="thumb" class="thumb-img">
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <!-- Right: Detailed Configuration Panel -->
+      <div class="product-configs">
+        
+        <div class="heading-block border-bottom">
+          <p class="brand-sub-header">ESCAPE CLOTHING 17 / {{ product.type | default: "ORIGINAL COLLECTION" | uppercase }}</p>
+          <h1 class="main-product-title">{{ product.title | default: "Seoul Team Varsity Retro Jersey" }}</h1>
+          
+          <div class="price-rating-row">
+            <div class="price-container">
+              <span class="price-active">{{ current_variant.price | default: 39900 | money }}</span>
+              {%- if current_variant.compare_at_price > current_variant.price -%}
+                <span class="price-compare">{{ current_variant.compare_at_price | default: 79900 | money }}</span>
+              {%- endif -%}
+            </div>
+            
+            <div class="stock-status">
+              <span class="blink-dot"></span>
+              <span class="stock-label">LOW INNagpur INVENTORY</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Description Tab -->
+        <div class="section-tab border-bottom pb-4">
+          <h4 class="tab-title">[ FABRIC BLUEPRINT NOTES ]</h4>
+          <p class="tab-short-desc">
+            {{ product.description | default: "Anti-gatekeep streetwear perfection. Heavily sourced for Nagpur students who demand premium fits without retail markups. Pre-washed organic heavy mesh detailing with deep rib neck locks that stay flat." }}
+          </p>
+        </div>
+
+        <!-- Shopify Native Product Add-To-Cart Form -->
+        {%- form 'product', product, id: 'AddToCartForm', class: 'native-product-form' -%}
+          
+          <!-- Variant ID Selector (standard required field for Shopify tracking) -->
+          <input type="hidden" name="id" value="{{ current_variant.id | default: 12345678 }}">
+
+          <!-- Variant Option Selectors -->
+          {%- if product.has_only_default_variant == false -%}
+            <div class="options-box pb-4">
+              {%- for option in product.options_with_values -%}
+                <div class="selector-wrapper">
+                  <label class="option-label" for="Option-{{ forloop.index }}">
+                    SELECT {{ option.name | uppercase }}:
+                  </label>
+                  <div class="custom-select-ui">
+                    <select 
+                      id="Option-{{ forloop.index }}" 
+                      name="options[{{ option.name | escape }}]"
+                      class="native-select-input"
+                    >
+                      {%- for value in option.values -%}
+                        <option 
+                          value="{{ value | escape }}"
+                          {% if option.selected_value == value %}selected="selected"{% endif %}
+                        >
+                          {{ value }}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- else -%}
+            <!-- Standard Size Fallback Selector for high performance mock -->
+            <div class="options-box pb-4">
+              <div class="selector-wrapper">
+                <label class="option-label">SELECT BAGGY SIZE PREFERMENT:</label>
+                <div class="size-bubble-grid">
+                  <button type="button" class="size-cell selected-cell">OVERSIZED M (Baggy)</button>
+                  <button type="button" class="size-cell">OVERSIZED L (Relaxed)</button>
+                  <button type="button" class="size-cell">OVERSIZED XL (Elite)</button>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+
+          <!-- Quantity Selector -->
+          <div class="quantity-box pb-6">
+            <label class="option-label">QUANTITY DROP COUNT:</label>
+            <div class="qty-control">
+              <button type="button" class="qty-btn decrement-btn">&minus;</button>
+              <input type="number" id="Quantity" name="quantity" value="1" min="1" class="qty-field">
+              <button type="button" class="qty-btn increment-btn">&plus;</button>
+            </div>
+          </div>
+
+          <!-- Promo Alert banner -->
+          <div class="promo-banner-card mb-6">
+            <span class="promo-star">★</span>
+            <p className="promo-text">
+              <strong>Shopify Native Promotion Active:</strong> Add any 3 pieces directly into your digital cart to automatically configure the Nagpur campus flat rate discount!
+            </p>
+          </div>
+
+          <!-- Checkout Action Buttons (Direct Buy Now Flow) -->
+          <div className="cta-wrapper">
+            
+            <!-- Standard Add to Bag button -->
+            <button 
+              type="submit" 
+              name="add" 
+              class="cta-btn secondary-cta"
+            >
+              ADD TO STREETWEAR BAG
+            </button>
+
+            <!-- Direct Shopify Native "BUY NOW" / Checkout Action -->
+            <button 
+              type="submit" 
+              name="add"
+              class="cta-btn primary-cta mt-3"
+              id="direct-buy-now-trigger"
+              onclick="triggerDirectPurchase(event)"
+            >
+              DIRECT BUY NOW — CHECKOUT
+            </button>
+
+          </div>
+
+        {%- endform -%}
+
+        <!-- Store Pickup Warning details -->
+        <div class="safety-roster bg-dark-grid p-4 mt-8 rounded-lg">
+          <h5 class="roster-title">[ ZERO DELIVERY WAIT TIME option ]</h5>
+          <p class="roster-text">
+            Prefer testing fits before taking them home? Check out online or show this blueprint screen to Suresh (+91 8261094774) or Rohit inside <strong>City Center Nagpur</strong> shop for instantaneous counter collections! Same-day pickup is fully online synchronized.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // High performance direct buy now interceptor helper
+  function triggerDirectPurchase(event) {
+    // Intercept default cart loop to pass immediately to shopify checkout
+    const form = document.querySelector('.native-product-form');
+    if (form) {
+      // Set redirect action path directly to checkout input action
+      const redirectInput = document.createElement('input');
+      redirectInput.type = 'hidden';
+      redirectInput.name = 'return_to';
+      redirectInput.value = '/checkout';
+      form.appendChild(redirectInput);
+    }
+  }
+
+  // Set up click interactions for sizes & quantity dials
+  document.addEventListener('DOMContentLoaded', function() {
+    const decBtn = document.querySelector('.decrement-btn');
+    const incBtn = document.querySelector('.increment-btn');
+    const qtyField = document.querySelector('.qty-field');
+
+    if(decBtn && incBtn && qtyField) {
+      decBtn.addEventListener('click', function() {
+        let val = parseInt(qtyField.value) || 1;
+        if(val > 1) qtyField.value = val - 1;
+      });
+
+      incBtn.addEventListener('click', function() {
+        let val = parseInt(qtyField.value) || 1;
+        qtyField.value = val + 1;
+      });
+    }
+
+    // Size choice selection
+    const sizeBtns = document.querySelectorAll('.size-cell');
+    sizeBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        sizeBtns.forEach(b => b.classList.remove('selected-cell'));
+        this.classList.add('selected-cell');
+      });
+    });
+  });
+</script>
+
+<style>
+  .escape-product-section {
+    background: #050505;
+    padding: 4rem 0;
+    border-bottom: 1px solid #141414;
+  }
+
+  .product-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @media (min-width: 992px) {
+    .product-layout-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 5rem;
+    }
+  }
+
+  /* Left panel Image components */
+  .product-visuals {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .active-focus-wrapper {
+    background: #090909;
+    border: 1px solid #141414;
+    border-radius: 12px;
+    padding: 0.5rem;
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+  }
+
+  .badge-overlay {
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+    z-index: 10;
+  }
+
+  .detail-badge-neon {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 900;
+    background: rgba(0, 0, 0, 0.85);
+    border: 12px;
+    border: 1px solid #222;
+    padding: 0.35rem 0.65rem;
+    color: var(--color-neon-primary);
+  }
+
+  .detail-badge-red {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 900;
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid #222;
+    padding: 0.35rem 0.65rem;
+    color: #ffffff;
+  }
+
+  .active-large-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: color-dodge;
+    border-radius: 8px;
+  }
+
+  .gallery-thumbs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+  }
+
+  .thumb-frame {
+    aspect-ratio: 4/5;
+    border: 1px solid #1a1a1a;
+    background: #080808;
+    border-radius: 4px;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0.15rem;
+  }
+
+  .thumb-frame.selected {
+    border-color: var(--color-neon-primary);
+  }
+
+  .thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: luminate;
+  }
+
+  /* Right panel customizers */
+  .product-configs {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .border-bottom {
+    border-bottom: 1px solid #121212;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .brand-sub-header {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 900;
+    color: #555;
+    letter-spacing: 0.15em;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .main-product-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.1;
+  }
+
+  @media (min-width: 576px) {
+    .main-product-title {
+      font-size: 2.5rem;
+    }
+  }
+
+  .price-rating-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .price-container {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+
+  .price-active {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--color-neon-primary);
+  }
+
+  .price-compare {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: #444;
+    text-decoration: line-through;
+  }
+
+  .stock-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: rgba(57, 255, 20, 0.05);
+    border: 1px solid rgba(57, 255, 20, 0.1);
+    padding: 0.35rem 0.65rem;
+    border-radius: 4px;
+  }
+
+  .blink-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--color-neon-primary);
+    border-radius: 50%;
+    animation: blink 1.5s infinite;
+  }
+
+  @keyframes blink {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+  }
+
+  .stock-label {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: var(--color-neon-primary);
+  }
+
+  .tab-title {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: #888;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: 0.05em;
+  }
+
+  .tab-short-desc {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* Form & Variant styling */
+  .option-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: #ffffff;
+    display: block;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .custom-select-ui {
+    position: relative;
+    width: 100%;
+    background: #090909;
+    border: 1px solid #1f1f1f;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .native-select-input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: transparent;
+    color: #ffffff;
+    border: none;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+  }
+
+  .size-bubble-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .size-cell {
+    background: #080808;
+    border: 1px solid #141414;
+    color: #888888;
+    padding: 0.75rem 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .size-cell:hover, .size-cell.selected-cell {
+    border-color: var(--color-neon-primary);
+    color: #ffffff;
+    background: #0d210a;
+  }
+
+  /* Quantity widgets */
+  .qty-control {
+    display: inline-flex;
+    align-items: center;
+    background: #080808;
+    border: 1px solid #141414;
+    border-radius: 4px;
+    padding: 0.2rem;
+  }
+
+  .qty-btn {
+    background: transparent;
+    border: none;
+    color: #8af878;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .qty-btn:hover {
+    color: #ffffff;
+  }
+
+  .qty-field {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    width: 44px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    outline: none;
+  }
+
+  .qty-field::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  /* Banner promos */
+  .promo-banner-card {
+    background: #0c0e0a;
+    border: 1px solid rgba(57, 255, 20, 0.15);
+    padding: 0.85rem 1rem;
+    border-radius: 6px;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .promo-star {
+    color: var(--color-neon-primary);
+  }
+
+  .promo-text {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: #888888;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  /* Dynamic CTAs - Elite Streetwear checkout */
+  .cta-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cta-btn {
+    width: 100%;
+    padding: 1.1rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .secondary-cta {
+    background: #0e0e0e;
+    color: #ffffff;
+    border: 1px solid #222222;
+  }
+
+  .secondary-cta:hover {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+  }
+
+  .primary-cta {
+    background: var(--color-neon-primary);
+    color: #000000;
+    box-shadow: 0 8px 24px rgba(57, 255, 20, 0.15);
+  }
+
+  .primary-cta:hover {
+    background: #ffffff;
+    color: #000000;
+    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+  }
+
+  /* Safety rosters */
+  .safety-roster {
+    background: #090909;
+    border: 1px dashed #141414;
+    padding: 1rem;
+    border-radius: 6px;
+  }
+
+  .roster-title {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 950;
+    color: var(--color-neon-primary);
+    margin: 0 0 0.45rem 0;
+    letter-spacing: 0.05em;
+  }
+
+  .roster-text {
+    font-family: var(--font-sans);
+    font-size: 0.73rem;
+    color: #555555;
+    line-height: 1.45;
+    margin: 0;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Streetwear Content Panel",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show Brand Slogan Title",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

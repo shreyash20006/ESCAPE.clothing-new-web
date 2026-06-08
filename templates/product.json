@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "show_vendor": false,
+        "show_share_buttons": true,
+        "enable_sticky_info": true
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

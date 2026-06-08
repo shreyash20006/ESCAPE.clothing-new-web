@@ -30,7 +30,7 @@ export default function OrderProcess() {
         {/* Section Header */}
         <div className="mb-16 text-center space-y-4">
           <div className="inline-flex items-center space-x-1.5 font-mono text-[10px] font-bold tracking-widest text-[#39FF14] uppercase">
-            <span>[ THE BLUEPRINT FLOW ]</span>
+            <span>[ THE ORDER PROCESS ]</span>
           </div>
           
           <h2 className="font-sans text-4xl font-black tracking-tight text-white sm:text-5xl" id="order-process-headline">

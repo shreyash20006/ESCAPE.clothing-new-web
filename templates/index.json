@@ -1,0 +1,54 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "title": "ESCAPE THE STANDARD DEALS",
+        "subheading": "Premium Heavy Weaves. Curated Streetwear Packs for Campus Legends.",
+        "button_label": "EXPLORE RACKS",
+        "badge_text": " NAGPUR STORE LAUNCH V1.7 "
+      }
+    },
+    "featured-collection-jerseys": {
+      "type": "main-collection",
+      "settings": {
+        "title": "PREMIUM VARSITY JERSEYS",
+        "subheading": "Heavy ventilation ports & high-contrast stitched athletic panel blocks.",
+        "collection_handle": "jerseys",
+        "limit": 3
+      }
+    },
+    "featured-collection-tops": {
+      "type": "main-collection",
+      "settings": {
+        "title": "STREETWEAR TOPS & OVERSIZED",
+        "subheading": "Genuine 240 GSM organic heavy drop knits that never bacon-neck.",
+        "collection_handle": "streetwear-tops",
+        "limit": 3
+      }
+    },
+    "featured-collection-bottoms": {
+      "type": "main-collection",
+      "settings": {
+        "title": "TACTICAL BOTOMS & CARGOS",
+        "subheading": "Reinforced knees, D-ring loops, and adjustable strap locks.",
+        "collection_handle": "bottoms-cargos",
+        "limit": 2
+      }
+    },
+    "instagram-feed": {
+      "type": "instagram-feed",
+      "settings": {
+        "title": "SQUAD LOOKBOOK",
+        "subheading": "Real people, real fits. Tag @escape_clothing17 to get in rotation."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "featured-collection-jerseys",
+    "featured-collection-tops",
+    "featured-collection-bottoms",
+    "instagram-feed"
+  ]
+}

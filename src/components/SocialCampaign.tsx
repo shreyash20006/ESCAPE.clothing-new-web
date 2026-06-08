@@ -20,16 +20,16 @@ export default function SocialCampaign() {
         <div className="mb-16 text-center max-w-3xl mx-auto space-y-4">
           <span className="inline-flex items-center space-x-1.5 rounded-full border border-[#39FF14]/20 bg-[#39FF14]/10 px-3 py-1 font-mono text-[10px] font-bold tracking-widest text-[#39FF14] uppercase">
             <Volume2 className="h-4.5 w-4.5 text-[#39FF14]" />
-            <span>AMBASSADOR LAUNCH BLUEPRINT PACKS</span>
+            <span>INSTAGRAM SQUAD CREATIVE KIT</span>
           </span>
           
           <h2 className="font-sans text-4xl font-black tracking-tight text-white uppercase sm:text-5xl" id="social-headline">
             LAUNCH THE MOVEMENT <br />
-            <span className="text-zinc-500">NAGPUR STREETWEAR BLUEPRINTS</span>
+            <span className="text-zinc-500">REPRESENT THE CULTURE</span>
           </h2>
           
           <p className="font-sans text-xs leading-relaxed text-zinc-500 sm:text-sm">
-            We are completely bypassing gatekeep marketing. Grab copyable Gen-Z friendly streetwear launch scripts, use the matching assets, and tag us to get featured in our daily campus drops feed!
+            Ready to represent? Grab our ready-to-use streetwear social captions for your next look check. Tag us on Instagram to get featured in our daily campus drops feed and lock in exclusive squad premium rates!
           </p>
         </div>
 
@@ -84,10 +84,10 @@ export default function SocialCampaign() {
             <div className="space-y-3">
               <div className="flex items-center space-x-1.5 font-mono text-[9px] font-bold text-[#39FF14] tracking-widest uppercase">
                 <Instagram className="h-4.5 w-4.5" />
-                <span>@ESCAPE_CLOTHING17 CAMPAIGN FEED</span>
+                <span>@ESCAPE_CLOTHING17 SQUAD FEED</span>
               </div>
-              <h3 className="font-sans text-2xl font-black text-white uppercase tracking-tight">INSTAGRAM FEEDS</h3>
-              <p className="font-sans text-xs text-zinc-500">Live feeds from our Nagpur streetwear community racks. Tag us to get featured in the rotation.</p>
+              <h3 className="font-sans text-2xl font-black text-white uppercase tracking-tight">SQUAD LOOKBOOK</h3>
+              <p className="font-sans text-xs text-zinc-500">Real people, real fits. Tag us to get put in high-key rotation.</p>
             </div>
 
             <a
@@ -102,7 +102,7 @@ export default function SocialCampaign() {
             </a>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6" id="instagram-mock-feed-grid">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6" id="instagram-community-feed-grid">
             {INSTAGRAM_FEED_MOCK.map((feed) => (
               <div
                 key={feed.id}

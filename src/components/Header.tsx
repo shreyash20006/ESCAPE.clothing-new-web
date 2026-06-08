@@ -1,7 +1,8 @@
-import React from "react";
-import { ShoppingBag, Flame, MapPin, Sparkles, MessageCircle } from "lucide-react";
+import React, { useState } from "react";
+import { ShoppingBag, Flame, MapPin, Sparkles, MessageCircle, Store } from "lucide-react";
 import { motion } from "motion/react";
 import { EnquiryItem } from "../types";
+import ShopifyModal from "./ShopifyModal";
 
 interface HeaderProps {
   enquiryItems: EnquiryItem[];
@@ -10,6 +11,7 @@ interface HeaderProps {
 }
 
 export default function Header({ enquiryItems, onOpenBag, onScrollToSection }: HeaderProps) {
+  const [isShopifyOpen, setIsShopifyOpen] = useState(false);
   const totalItemCount = enquiryItems.reduce((acc, curr) => acc + curr.quantity, 0);
 
   return (
@@ -62,7 +64,7 @@ export default function Header({ enquiryItems, onOpenBag, onScrollToSection }: H
             className="text-zinc-400 transition-colors hover:text-[#39FF14]"
             id="nav-social-btn"
           >
-            [ AMBASSADOR PACK ]
+            [ INSTAGRAM SQUAD ]
           </button>
           <button
             onClick={() => onScrollToSection("about")}
@@ -77,6 +79,13 @@ export default function Header({ enquiryItems, onOpenBag, onScrollToSection }: H
             id="nav-find-btn"
           >
             [ NAGPUR SHOP ]
+          </button>
+          <button
+            onClick={() => setIsShopifyOpen(true)}
+            className="text-[#39FF14] transition-colors hover:text-white font-bold"
+            id="nav-shopify-guide-btn"
+          >
+            [ SHOPIFY SETUP ]
           </button>
         </nav>
 
@@ -95,6 +104,17 @@ export default function Header({ enquiryItems, onOpenBag, onScrollToSection }: H
             </span>
             <span>@escape_clothing17</span>
           </a>
+
+          {/* Shopify Setup Button */}
+          <button
+            onClick={() => setIsShopifyOpen(true)}
+            className="flex items-center space-x-1.5 border border-[#39FF14]/30 bg-[#39FF14]/5 px-3 py-1.5 font-mono text-[10.5px] font-black text-[#39FF14] rounded-full transition-all hover:bg-[#39FF14] hover:text-black"
+            id="nav-shopify-active-btn"
+          >
+            <Store className="h-3.5 w-3.5" />
+            <span className="hidden lg:inline">ADD TO SHOPIFY</span>
+            <span className="lg:hidden">SHOPIFY</span>
+          </button>
 
           {/* Inquiry / Shopping Bag Trigger */}
           <button
@@ -118,6 +138,9 @@ export default function Header({ enquiryItems, onOpenBag, onScrollToSection }: H
         </div>
 
       </div>
+
+      {/* Shopify Integration Modal */}
+      <ShopifyModal isOpen={isShopifyOpen} onClose={() => setIsShopifyOpen(false)} />
     </header>
   );
 }

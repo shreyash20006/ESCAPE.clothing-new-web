@@ -62,7 +62,7 @@ export default function EnquiryBag({ isOpen, onClose, enquiryItems, onRemoveItem
 
   // Compile WhatsApp text template
   const compileWhatsAppMessage = () => {
-    let msg = `🔥 *ESCAPE CLOTHING 17 - STREETWEAR BLUEPRINT ENQUIRY* 🔥\n\n`;
+    let msg = `🔥 *ESCAPE CLOTHING 17 - STREETWEAR BAG ENQUIRY* 🔥\n\n`;
     msg += `Hey Escape Team! I just checked out your modern launch page and love your deals on fabric. I would like to lock in the following streetwear pieces:\n\n`;
     
     enquiryItems.forEach((item, index) => {
@@ -122,7 +122,7 @@ export default function EnquiryBag({ isOpen, onClose, enquiryItems, onRemoveItem
             <div className="flex items-center justify-between border-b border-zinc-950 p-6 bg-black">
               <div className="flex items-center space-x-2.5">
                 <ShoppingBag className="h-5 w-5 text-[#39FF14]" />
-                <h2 className="font-mono text-xs font-black tracking-widest text-white uppercase">[ MY URBAN Blueprints ]</h2>
+                <h2 className="font-mono text-xs font-black tracking-widest text-[#39FF14] uppercase">[ MY STREETWEAR BAG ]</h2>
               </div>
               <button
                 onClick={onClose}
@@ -141,16 +141,16 @@ export default function EnquiryBag({ isOpen, onClose, enquiryItems, onRemoveItem
                     <ShoppingBag className="h-10 w-10 text-zinc-800" />
                   </div>
                   <div>
-                    <h3 className="font-mono text-xs font-bold text-zinc-300 uppercase">[ COLD STORAGE EMPTY ]</h3>
+                    <h3 className="font-mono text-xs font-bold text-zinc-300 uppercase">[ YOUR BAG IS EMPTY ]</h3>
                     <p className="mx-auto mt-2 max-w-[250px] font-sans text-xs leading-relaxed text-zinc-650">
-                      Vibe check says you haven't added any streetwear blueprints yet. Browse the lineup to load up selection drops.
+                      Vibe check says you haven't added any streetwear items yet. Browse our collections to load up some fresh drops.
                     </p>
                   </div>
                   <button
                     onClick={onClose}
                     className="rounded bg-[#39FF14] text-black hover:bg-white font-mono text-[11px] font-black px-5 py-2.5 transition-colors"
                   >
-                    DEPLOY COLLECTION DROPS
+                    EXPLORE COLLECTION
                   </button>
                 </div>
               ) : (
@@ -261,7 +261,7 @@ export default function EnquiryBag({ isOpen, onClose, enquiryItems, onRemoveItem
                 <div className="rounded-lg bg-zinc-950 p-4 border border-zinc-900 space-y-3">
                   <div className="flex items-center space-x-2 border-b border-zinc-900 pb-2">
                     <Sparkles className="h-4 w-4 text-[#39FF14] shrink-0" />
-                    <span className="font-mono text-[10px] font-bold text-white uppercase tracking-wider">CHOOSE NAGPUR ASSOCIATE:</span>
+                    <span className="font-mono text-[10px] font-bold text-white uppercase tracking-wider">SEND FIT TO ASSISTANT:</span>
                   </div>
 
                   <p className="font-sans text-[10px] leading-normal text-zinc-500">

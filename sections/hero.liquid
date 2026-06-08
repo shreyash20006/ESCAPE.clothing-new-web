@@ -1,0 +1,388 @@
+{% comment %}
+  ESCAPE CLOTHING 17 - STREETWEAR LAUNCH HERO
+{% endcomment %}
+<section class="escape-hero-section">
+  <div class="hero-noise"></div>
+  <div class="hero-grain"></div>
+  
+  <div class="container hero-layout">
+    <div class="hero-visual-card">
+      <div class="card-status-badge">
+        <span class="pulse-ring"></span>
+        {{ section.settings.badge_text }}
+      </div>
+      
+      <div class="image-wrapper">
+        <img 
+          src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop" 
+          alt="Nagpur Streetwear Sanctuary" 
+          class="hero-image-render"
+          loading="eager"
+        >
+        <div class="overlay-grad"></div>
+      </div>
+
+      <div class="card-meta">
+        <span class="meta-tag">[ SPECIAL PROMO ]</span>
+        <span class="meta-desc">BUY ALL 3 FOR ₹999</span>
+      </div>
+    </div>
+
+    <div class="hero-text-content">
+      <div class="hero-badge-row">
+        <span class="badge">[ COVETED FABRIC ]</span>
+        <span class="badge">[ HEAVYWEIGHT DROP ]</span>
+      </div>
+
+      <h1 class="hero-h1">
+        {{ section.settings.title }}
+      </h1>
+      
+      <p class="hero-p">
+        {{ section.settings.subheading }}
+      </p>
+
+      <div class="hero-actions-row">
+        <a href="#featured-collection" class="btn-primary">
+          {{ section.settings.button_label }}
+          <span class="arrow">&rarr;</span>
+        </a>
+        <a href="https://www.instagram.com/escape_clothing17" target="_blank" class="btn-secondary">
+          FOLLOW STATION
+        </a>
+      </div>
+
+      <!-- Quick stats bar -->
+      <div class="hero-stats-bar">
+        <div class="stat-unit">
+          <span class="stat-num">240</span>
+          <span class="stat-lbl">GSM PREMIUM COTTON</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-unit">
+          <span class="stat-num">FLAT ₹999</span>
+          <span class="stat-lbl">CAMPUS BUNDLE</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-unit">
+          <span class="stat-num">0 WAIT</span>
+          <span class="stat-lbl">SAME DAY STORE PICKUP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .escape-hero-section {
+    position: relative;
+    background: #050505;
+    padding: 3rem 0;
+    overflow: hidden;
+    border-bottom: 1px solid #111;
+  }
+
+  @media (min-width: 992px) {
+    .escape-hero-section {
+      padding: 6rem 0;
+    }
+  }
+
+  /* Seamless grid background noise */
+  .hero-noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    pointer-events: none;
+    background-image: radial-gradient(#fff 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .hero-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 992px) {
+    .hero-layout {
+      grid-template-columns: 1.1fr 1.3fr;
+      gap: 4.5rem;
+    }
+  }
+
+  /* High status modular badge inside standard card */
+  .hero-visual-card {
+    position: relative;
+    background: #090909;
+    border: 1px solid #181818;
+    border-radius: 1.25rem;
+    padding: 0.75rem;
+    box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .card-status-badge {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    background: rgba(0, 0, 0, 0.82);
+    border: 1px solid #222;
+    padding: 0.45rem 0.85rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--color-neon-primary);
+    border-radius: 0.35rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    z-index: 10;
+    letter-spacing: 0.05em;
+  }
+
+  .pulse-ring {
+    width: 6px;
+    height: 6px;
+    background: var(--color-neon-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--color-neon-primary);
+  }
+
+  .image-wrapper {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: 0.85rem;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .hero-image-render {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: luminate;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hero-visual-card:hover .hero-image-render {
+    transform: scale(1.05);
+  }
+
+  .overlay-grad {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #000 0%, transparent 60%);
+    opacity: 0.8;
+  }
+
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0.5rem 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  .meta-tag {
+    color: var(--color-neon-primary);
+  }
+
+  .meta-desc {
+    color: #ffffff;
+  }
+
+  /* Right-hand typography grid */
+  .hero-text-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-badge-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    background: #0e0e0e;
+    border: 1px solid #1a1a1a;
+    padding: 0.35rem 0.65rem;
+    border-radius: 4px;
+    color: #888888;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-h1 {
+    font-family: var(--font-display);
+    font-size: 2.75rem;
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.25rem 0;
+    color: #ffffff;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  @media (min-width: 576px) {
+    .hero-h1 {
+      font-size: 3.75rem;
+    }
+  }
+
+  .hero-p {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #999999;
+    margin: 0 0 2rem 0;
+    max-width: 520px;
+  }
+
+  .hero-actions-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .btn-primary {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    background: var(--color-neon-primary);
+    color: #000000;
+    border: 1px solid var(--color-neon-primary);
+    padding: 1rem 1.75rem;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-primary:hover {
+    background: #ffffff;
+    border-color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    background: #0c0c0c;
+    color: #ffffff;
+    border: 1px solid #1f1f1f;
+    padding: 1rem 1.75rem;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(57, 255, 20, 0.3);
+    color: var(--color-neon-primary);
+    transform: translateY(-2px);
+  }
+
+  /* Stats bar specifications */
+  .hero-stats-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    border-top: 1px solid #141414;
+    padding-top: 2rem;
+  }
+
+  @media (min-width: 480px) {
+    .hero-stats-bar {
+      flex-direction: row;
+      align-items: center;
+      gap: 1.75rem;
+    }
+  }
+
+  .stat-unit {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .stat-lbl {
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    font-weight: 700;
+    color: #555555;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.35rem;
+  }
+
+  .stat-divider {
+    display: none;
+    width: 1px;
+    height: 32px;
+    background: #181818;
+  }
+
+  @media (min-width: 480px) {
+    .stat-divider {
+      display: block;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Streetwear Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading Title",
+      "default": "ESCAPE THE STANDARD DEALS"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading Details",
+      "default": "Premium Heavy Weaves. Curated Streetwear Packs for Campus Legends."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Text",
+      "default": "EXPLORE RACKS"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Status Text",
+      "default": " NAGPUR STORE LAUNCH V1.7 "
+    }
+  ]
+}
+{% endschema %}

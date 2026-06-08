@@ -81,7 +81,7 @@ export default function Catalog({ onAddToBag, enquiryItems }: CatalogProps) {
                 <span className="relative inline-flex h-3.5 w-3.5 rounded-full bg-[#39FF14]"></span>
               </span>
               <div>
-                <p className="font-mono text-[9px] font-bold text-[#39FF14] uppercase tracking-wider">[ NAGPUR EXCLUSIVE BLUEPRINT ]</p>
+                <p className="font-mono text-[9px] font-bold text-[#39FF14] uppercase tracking-wider">[ NAGPUR SPECIAL PROMO ]</p>
                 <h4 className="font-sans text-sm font-black text-white uppercase tracking-tight">
                   {BUNDLE_DEAL.description}
                 </h4>
@@ -110,7 +110,7 @@ export default function Catalog({ onAddToBag, enquiryItems }: CatalogProps) {
           <div className="max-w-2xl space-y-4">
             <div className="inline-flex items-center space-x-1.5 font-mono text-[10px] font-bold tracking-widest text-[#39FF14] uppercase">
               <Layers className="h-4 w-4" />
-              <span>THE EXCLUSIVE DIGITAL DIRECTORY</span>
+              <span>THE EXCLUSIVE DIGITAL CATALOG</span>
             </div>
             
             <h2 className="font-sans text-4xl font-black tracking-tight text-white sm:text-5xl" id="catalog-main-title">
